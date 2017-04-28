@@ -53,11 +53,17 @@ public class SimpleScheduler extends Scheduler {
 	}
 	
 	private void buildRoutines() {
-		if (generated){
+		if (generated) {
 			return;
 		}
 		solverOfYear.forEach((year, solver) -> {
-			Set<SimpleSolver.RoutineCell> routineCellsOfThatYear = solver.evaluateSolution(MAXIMUM_NO_OF_ROUNDS);
+			Set<SimpleSolver.RoutineCell> routineCellsOfThatYear = solver.evaluateSolutionSerially(MAXIMUM_NO_OF_ROUNDS);
+			if (routineCellsOfThatYear == null) {
+				routineCellsOfThatYear = solver.evaluateSolutionRandomly(MAXIMUM_NO_OF_ROUNDS);
+			}
+			if (routineCellsOfThatYear == null) {
+				throw new RuntimeException("Sorry, Routine can't be build, very tight situation");
+			}
 			routineCellsOfThatYear.stream()
 					.sorted((cell1, cell22) -> cell1.combinedSlot.compareTo(cell22.combinedSlot))
 					.forEach(cell -> addCellToYearWiseRoutine(year, cell));

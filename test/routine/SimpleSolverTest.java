@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import routine.holder.RoomHolder;
@@ -36,7 +35,7 @@ public class SimpleSolverTest {
 	
 	@Test
 	public void testSmallDataWith10000Round() throws Exception {
-		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolution(10000);
+		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolutionSerially(10000);
 		routineCells.forEach(routineCell -> {
 			System.out.println(routineCell.room + "," + routineCell.teacher + "," + routineCell.subject + "," + routineCell.combinedSlot);
 		});
@@ -44,7 +43,7 @@ public class SimpleSolverTest {
 	
 	@Test
 	public void solverReturnsNonOverlappingCells() throws Exception {
-		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS);
+		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolutionSerially(Constants.MAXIMUM_NO_OF_ROUNDS);
 		
 		verifyNonOverlappingCellsFor(routineCells);
 	}
@@ -60,7 +59,7 @@ public class SimpleSolverTest {
 						subjectHolder,
 						roomHolder,
 						teacherHolder))
-				.map(simpleSolver -> simpleSolver.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS))
+				.map(simpleSolver -> simpleSolver.evaluateSolutionSerially(Constants.MAXIMUM_NO_OF_ROUNDS))
 				.flatMap(Collection::stream)
 				.collect(Collectors.toSet());
 
@@ -71,7 +70,7 @@ public class SimpleSolverTest {
 //					roomHolder,
 //					teacherHolder);
 //
-//			routineCells.addAll(solverForYear.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS));
+//			routineCells.addAll(solverForYear.evaluateSolutionSerially(Constants.MAXIMUM_NO_OF_ROUNDS));
 //		});
 		
 		verifyNonOverlappingCellsFor(routineCells);

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
 
 import routine.holder.RoomHolder;
 import routine.holder.SlotHolder;
@@ -26,6 +29,16 @@ public class SimpleSolver {
 	private final RoomHolder roomHolder;
 	private final TeacherHolder teacherHolder;
 	private Set<RoutineCell> routineCells;
+	public static final int[][] STRATEGIES = new int[][]{
+			{1, 3},
+			{2, 2},
+			{1, 2, 1},
+			{1, 1, 2},
+			{2, 1, 1},
+			{3},
+			{2},
+			{1}
+	};
 	
 	public class RoutineCell {
 		DayTimeSlot combinedSlot;
@@ -42,10 +55,18 @@ public class SimpleSolver {
 		this.teacherHolder = teacherHolder;
 	}
 	
-	public Set<RoutineCell> evaluateSolution(int noOfRounds) {
+	public Set<RoutineCell> evaluateSolutionSerially(int noOfRounds) {
+		return evaluateSolution(noOfRounds, this::processOneRoundSerially);
+	}
+	
+	public Set<RoutineCell> evaluateSolutionRandomly(int noOfRounds) {
+		return evaluateSolution(noOfRounds, this::processOneRoundRandomly);
+	}
+	
+	private Set<RoutineCell> evaluateSolution(int noOfRounds, Function<Integer, Boolean> processTechnique) {
 		routineCells = new HashSet<>();
 		while (noOfRounds-- > 0) {
-			if (!processOneRound(noOfRounds)) {
+			if (!processTechnique.apply(noOfRounds)) {
 				continue;
 			}
 			if (subjectHolder.totalRemainingMinutes() <= 0) {
@@ -55,20 +76,13 @@ public class SimpleSolver {
 		return null;
 	}
 	
-	private boolean processOneRound(int roundNumber) {
-		int[][] strategies = {
-				{1, 3},
-				{2, 2},
-				{1, 2, 1},
-				{1, 1, 2},
-				{2, 1, 1},
-				{3},
-				{2},
-				{1}
-		};
-//		Random random = new Random();
-//		return strategy(strategies[random.nextInt(strategies.length)]);
-		return strategy(strategies[roundNumber % strategies.length]);
+	private boolean processOneRoundSerially(int roundNumber) {
+		return strategy(STRATEGIES[roundNumber % STRATEGIES.length]);
+	}
+	
+	private boolean processOneRoundRandomly(int roundNumber) {
+		Random random = new Random();
+		return strategy(STRATEGIES[random.nextInt(STRATEGIES.length)]);
 	}
 	
 	private boolean strategy(int... periods) {
