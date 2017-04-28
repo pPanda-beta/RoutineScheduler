@@ -52,13 +52,10 @@ public class SimpleSchedulerTest {
 		List<Allotment> allotments = deptClasses.values().stream()
 				.flatMap(Collection::stream)
 				.collect(Collectors.toList());
-		
-		for (Allotment allotment1 : allotments) {
-			for (Allotment allotment2 : allotments) {
-				if (allotment1 != allotment2 && allotment1.isOverlappingWith(allotment2)) {
-					fail(allotment1 + " is overlapping with " + allotment2);
-				}
+		Helper.forEachPair(allotments, (allotment1, allotment2) -> {
+			if (allotment1.isOverlappingWith(allotment2)) {
+				fail(allotment1 + " is overlapping with " + allotment2);
 			}
-		}
+		});
 	}
 }

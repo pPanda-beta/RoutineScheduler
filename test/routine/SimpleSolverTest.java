@@ -23,7 +23,6 @@ import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
  */
 public class SimpleSolverTest {
 	
-	private final Helper helper = new Helper();
 	SimpleSolver solver;
 	
 	@Before
@@ -79,7 +78,7 @@ public class SimpleSolverTest {
 	}
 	
 	private void verifyNonOverlappingCellsFor(Set<SimpleSolver.RoutineCell> routineCells) {
-		helper.forEachPair(routineCells, (cell1, cell2) -> {
+		Helper.forEachPair(routineCells, (cell1, cell2) -> {
 			if (cell1.room.toString().equals(cell2.room.toString())
 					&& cell1.combinedSlot.isOverlappingWith(cell2.combinedSlot)) {
 				fail("{ " + cell1.subject + "," + cell1.teacher + "," + cell1.combinedSlot + "}"
