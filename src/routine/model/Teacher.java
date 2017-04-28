@@ -23,7 +23,7 @@ public class Teacher extends Reservable {
 		return subjects.contains(subject);
 	}
 	
-	public int teachesMoreSubjectsThan(Teacher other){
+	public int teachesMoreSubjectsThan(Teacher other) {
 		return this.subjects.size() - other.subjects.size();
 	}
 	

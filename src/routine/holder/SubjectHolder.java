@@ -1,7 +1,6 @@
 package routine.holder;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +32,7 @@ public class SubjectHolder {
 		return subjects.stream()
 				.filter(subject -> subject.getRemainingMinutes() > 0)
 				.filter(subject -> subject.canFitIn(slot))
-			//	.sorted(Comparator.comparing(subject -> -subject.getRemainingMinutes()))
+				//	.sorted(Comparator.comparing(subject -> -subject.getRemainingMinutes()))
 				.findFirst()
 				.orElse(null);
 	}

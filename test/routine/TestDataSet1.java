@@ -1,16 +1,9 @@
 package routine;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
-import routine.model.Allotment;
-
-import static java.time.DayOfWeek.MONDAY;
 
 /**
  * Created by Palash_Das on 28-04-2017.
@@ -38,4 +31,4 @@ public class TestDataSet1 {
 		put("ARS", Arrays.asList("CS292", "CS391"));
 		
 	}};
-};
+}

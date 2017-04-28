@@ -50,9 +50,9 @@ public class SamplesFactory {
 	public static final TreeMap<DayOfWeek, Map<String, List<Allotment>>> SAMPLE_ROUTINE = new TreeMap<DayOfWeek, Map<String, List<Allotment>>>() {{
 		put(MONDAY, new TreeMap<String, List<Allotment>>() {{
 			put("2nd", Arrays.asList(
-					new Allotment("P.D.", "CS201", "1011",  LocalTime.of(11, 10), 2),
+					new Allotment("P.D.", "CS201", "1011", LocalTime.of(11, 10), 2),
 					new Allotment("M.B.", "CS293", "Lab3", LocalTime.of(10, 20), 3),
-					new Allotment("P.D.", "CS401","1010", LocalTime.parse("09:30:00"), 2)
+					new Allotment("P.D.", "CS401", "1010", LocalTime.parse("09:30:00"), 2)
 			));
 			put("4th", Arrays.asList(
 					new Allotment("P.D.", "CS401", "1010", LocalTime.parse("09:30:00"), 2)
@@ -61,7 +61,7 @@ public class SamplesFactory {
 	}};
 	
 	public Allotment dummyAllotment() {
-		return new Allotment("P.D.", "CS201", "1011",  LocalTime.NOON, 2);
+		return new Allotment("P.D.", "CS201", "1011", LocalTime.NOON, 2);
 	}
 	
 	public Scheduler dummyScheduler() {
@@ -70,6 +70,16 @@ public class SamplesFactory {
 		}};
 		
 		return new Scheduler(SAMPLE_ROOMS, SAMPLE_SUBJECTS, semSubjects, SAMPLE_TEACHER_PREFERENCES) {
+			@Override
+			public List<SimpleSolver.RoutineCell> getAllRoutineCells() {
+				return Arrays.asList();
+			}
+			
+			@Override
+			public RoutineFormatter getFormatter() {
+				return new RoutineFormatter(Arrays.asList());
+			}
+			
 			@Override
 			public Map<DayOfWeek, Map<String, List<Allotment>>> getRoutineByYear() {
 				return SAMPLE_ROUTINE;

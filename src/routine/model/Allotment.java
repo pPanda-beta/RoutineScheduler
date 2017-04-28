@@ -27,7 +27,7 @@ public class Allotment {
 	}
 	
 	public boolean isOverlappingWith(Allotment other) {
-		if (!roomNo.equals(other.roomNo)){
+		if (!roomNo.equals(other.roomNo)) {
 			return false;
 		}
 		TimeSlot mySlot = new TimeSlot(startTime, endTime());

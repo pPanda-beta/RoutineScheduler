@@ -26,7 +26,7 @@ public class TeacherHolderTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		teacherHolder = new TeacherHolder(new HashMap<String, List<String>>(){{
+		teacherHolder = new TeacherHolder(new HashMap<String, List<String>>() {{
 			put("P.D.", Arrays.asList("IT401"));
 			put("A.B.", Arrays.asList("CS401", "IT401"));
 		}});

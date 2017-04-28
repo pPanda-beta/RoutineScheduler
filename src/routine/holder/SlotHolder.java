@@ -37,7 +37,7 @@ public class SlotHolder {
 	
 	private List<DayTimeSlot> getConsecutiveSlotsIfPossible(int no) {
 		List<DayTimeSlot> result = new ArrayList<>();
-		if(availableSlots.isEmpty()){
+		if (availableSlots.isEmpty()) {
 			availableSlots.addAll(reusableSlots);
 			reusableSlots.clear();
 		}
