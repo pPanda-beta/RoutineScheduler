@@ -4,9 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collector;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import routine.holder.RoomHolder;
@@ -24,6 +23,7 @@ import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
  */
 public class SimpleSolverTest {
 	
+	private final Helper helper = new Helper();
 	SimpleSolver solver;
 	
 	@Before
@@ -79,17 +79,14 @@ public class SimpleSolverTest {
 	}
 	
 	private void verifyNonOverlappingCellsFor(Set<SimpleSolver.RoutineCell> routineCells) {
-		for (SimpleSolver.RoutineCell cell1 : routineCells) {
-			for (SimpleSolver.RoutineCell cell2 : routineCells) {
-				if (cell1 != cell2
-						&& cell1.room.toString().equals(cell2.room.toString())
-						&& cell1.combinedSlot.isOverlappingWith(cell2.combinedSlot)) {
-					fail("{ " + cell1.subject + "," + cell1.teacher + "," + cell1.combinedSlot + "}"
-							+ " is overlapping with "
-							+ "{" + cell2.subject + "," + cell2.teacher + "," + cell2.combinedSlot + "}"
-							+ " in room " + cell1.room);
-				}
+		helper.forEachPair(routineCells, (cell1, cell2) -> {
+			if (cell1.room.toString().equals(cell2.room.toString())
+					&& cell1.combinedSlot.isOverlappingWith(cell2.combinedSlot)) {
+				fail("{ " + cell1.subject + "," + cell1.teacher + "," + cell1.combinedSlot + "}"
+						+ " is overlapping with "
+						+ "{" + cell2.subject + "," + cell2.teacher + "," + cell2.combinedSlot + "}"
+						+ " in room " + cell1.room);
 			}
-		}
+		});
 	}
 }
