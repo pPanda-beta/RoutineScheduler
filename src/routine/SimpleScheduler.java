@@ -21,8 +21,9 @@ import static routine.Constants.MAXIMUM_NO_OF_ROUNDS;
  */
 public class SimpleScheduler extends Scheduler {
 	
-	private Map<DayOfWeek, Map<String, List<Allotment>>> result = new TreeMap<>();
+	private Map<DayOfWeek, Map<String, List<Allotment>>> resultYearWise = new TreeMap<>();
 	private Map<String, SimpleSolver> solverOfYear = new HashMap<>();
+	private boolean generated = false;
 	
 	public SimpleScheduler(List<String> rooms, List<String> subjects, Map<String, List<String>> semSubjects, Map<String, List<String>> teacherPreferences) {
 		super(rooms, subjects, semSubjects, teacherPreferences);
@@ -46,23 +47,31 @@ public class SimpleScheduler extends Scheduler {
 	}
 	
 	@Override
-	public Map<DayOfWeek, Map<String, List<Allotment>>> getRoutine() {
+	public Map<DayOfWeek, Map<String, List<Allotment>>> getRoutineByYear() {
+		buildRoutines();
+		return resultYearWise;
+	}
+	
+	private void buildRoutines() {
+		if (generated){
+			return;
+		}
 		solverOfYear.forEach((year, solver) -> {
 			Set<SimpleSolver.RoutineCell> routineCellsOfThatYear = solver.evaluateSolution(MAXIMUM_NO_OF_ROUNDS);
 			routineCellsOfThatYear.stream()
 					.sorted((cell1, cell22) -> cell1.combinedSlot.compareTo(cell22.combinedSlot))
-					.forEach(cell -> addCellToResultRoutine(year, cell));
+					.forEach(cell -> addCellToYearWiseRoutine(year, cell));
 		});
-		return result;
+		generated = true;
 	}
 	
-	private void addCellToResultRoutine(String year, SimpleSolver.RoutineCell cell) {
+	private void addCellToYearWiseRoutine(String year, SimpleSolver.RoutineCell cell) {
 		DayOfWeek day = cell.combinedSlot.getDay();
 		
-		result.putIfAbsent(day, new TreeMap<>());
-		result.get(day).putIfAbsent(year, new ArrayList<>());
+		resultYearWise.putIfAbsent(day, new TreeMap<>());
+		resultYearWise.get(day).putIfAbsent(year, new ArrayList<>());
 		
-		result.get(day).get(year)
+		resultYearWise.get(day).get(year)
 				.add(new Allotment(cell.teacher.toString(),
 						cell.subject.toString(),
 						cell.room.toString(),

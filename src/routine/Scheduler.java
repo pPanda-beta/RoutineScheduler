@@ -23,7 +23,7 @@ public abstract class Scheduler {
 	}
 	
 	//Day vs year and its list of allotments
-	public abstract Map<DayOfWeek, Map<String, List<Allotment>>> getRoutine();
+	public abstract Map<DayOfWeek, Map<String, List<Allotment>>> getRoutineByYear();
 	
 	public static Scheduler getSimpleScheduler(List<String> rooms, List<String> subjects, Map<String, List<String>> semSubjects, Map<String, List<String>> teacherPreferences) {
 		return new SimpleScheduler(rooms, subjects, semSubjects, teacherPreferences);

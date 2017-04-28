@@ -71,7 +71,7 @@ public class SamplesFactory {
 		
 		return new Scheduler(SAMPLE_ROOMS, SAMPLE_SUBJECTS, semSubjects, SAMPLE_TEACHER_PREFERENCES) {
 			@Override
-			public Map<DayOfWeek, Map<String, List<Allotment>>> getRoutine() {
+			public Map<DayOfWeek, Map<String, List<Allotment>>> getRoutineByYear() {
 				return SAMPLE_ROUTINE;
 			}
 		};

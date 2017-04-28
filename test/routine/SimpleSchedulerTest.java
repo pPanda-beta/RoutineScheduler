@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 import routine.model.Allotment;
 
 import static org.junit.Assert.fail;
-import static routine.SamplesFactory.SAMPLE_ROOMS;
-import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
 import static routine.TestDataSet1.ROOMS;
 import static routine.TestDataSet1.SEM_SUBJECTS;
 import static routine.TestDataSet1.SUBJECTS;
@@ -30,7 +28,7 @@ public class SimpleSchedulerTest {
 	@Before
 	public void setUp() throws Exception {
 		simpleScheduler = new SimpleScheduler(ROOMS, SUBJECTS, SEM_SUBJECTS, TEACHER_PREFERENCES);
-		routine = simpleScheduler.getRoutine();
+		routine = simpleScheduler.getRoutineByYear();
 	}
 	
 	@Test
