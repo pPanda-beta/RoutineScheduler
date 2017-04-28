@@ -1,12 +1,11 @@
 package routine.model;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
-import routine.Constatnts;
+import routine.Constants;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -17,7 +16,7 @@ public abstract class Reservable {
 	protected final Set<DayTimeSlot> assignedSlots;
 	
 	Reservable() {
-		freeSlots = Constatnts.generateSlotsForWholeWeek();
+		freeSlots = Constants.generateSlotsForWholeWeek();
 		assignedSlots = new TreeSet<>();
 	}
 	

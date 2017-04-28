@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import routine.Constatnts;
+import routine.Constants;
 import routine.model.DayTimeSlot;
 
 /**
@@ -20,7 +20,7 @@ public class SlotHolder {
 	Set<DayTimeSlot> reusableSlots = new TreeSet<>();
 	
 	public SlotHolder() {
-		availableSlots = Constatnts.generateSlotsForWholeWeek();
+		availableSlots = Constants.generateSlotsForWholeWeek();
 	}
 	
 	public List<DayTimeSlot> popConsecutiveSlots(int no) {

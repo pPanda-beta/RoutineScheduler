@@ -17,7 +17,7 @@ import static java.time.DayOfWeek.SUNDAY;
  * Created by Palash_Das on 23-04-2017.
  */
 
-public class Constatnts {
+public class Constants {
 	
 	public static final int MAXIMUM_NO_OF_ROUNDS = 12999;
 	

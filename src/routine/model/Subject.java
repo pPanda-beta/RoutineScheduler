@@ -1,6 +1,6 @@
 package routine.model;
 
-import static routine.Constatnts.DURATION_OF_EACH_PERIOD;
+import static routine.Constants.DURATION_OF_EACH_PERIOD;
 
 /**
  * Created by Palash_Das on 24-04-2017.

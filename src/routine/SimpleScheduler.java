@@ -14,7 +14,7 @@ import routine.holder.SubjectHolder;
 import routine.holder.TeacherHolder;
 import routine.model.Allotment;
 
-import static routine.Constatnts.MAXIMUM_NO_OF_ROUNDS;
+import static routine.Constants.MAXIMUM_NO_OF_ROUNDS;
 
 /**
  * Created by Palash_Das on 23-04-2017.
@@ -67,7 +67,7 @@ public class SimpleScheduler extends Scheduler {
 						cell.subject.toString(),
 						cell.room.toString(),
 						cell.combinedSlot.getStart(),
-						(int) cell.combinedSlot.durationInMinutes() / Constatnts.DURATION_OF_EACH_PERIOD)
+						(int) cell.combinedSlot.durationInMinutes() / Constants.DURATION_OF_EACH_PERIOD)
 				);
 	}
 }
