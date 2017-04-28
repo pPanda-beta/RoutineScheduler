@@ -3,13 +3,18 @@ package routine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import routine.holder.RoomHolder;
 import routine.holder.SlotHolder;
 import routine.holder.SubjectHolder;
 import routine.holder.TeacherHolder;
 
+import static org.junit.Assert.fail;
 import static routine.SamplesFactory.SAMPLE_ROOMS;
 import static routine.SamplesFactory.SAMPLE_SEM_SUBJECTS;
 import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
@@ -31,10 +36,60 @@ public class SimpleSolverTest {
 	}
 	
 	@Test
-	public void testSmallDataWith100Round() throws Exception {
+	public void testSmallDataWith10000Round() throws Exception {
 		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolution(10000);
 		routineCells.forEach(routineCell -> {
 			System.out.println(routineCell.room + "," + routineCell.teacher + "," + routineCell.subject + "," + routineCell.combinedSlot);
 		});
+	}
+	
+	@Test
+	public void solverReturnsNonOverlappingCells() throws Exception {
+		Set<SimpleSolver.RoutineCell> routineCells = solver.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS);
+		
+		verifyNonOverlappingCellsFor(routineCells);
+	}
+	
+	@Test
+	public void differentSolverReturnsNonOverlappingCells() throws Exception {
+		RoomHolder roomHolder = new RoomHolder(TestDataSet1.ROOMS);
+		TeacherHolder teacherHolder = new TeacherHolder(TestDataSet1.TEACHER_PREFERENCES);
+
+		Set<SimpleSolver.RoutineCell> routineCells = TestDataSet1.SEM_SUBJECTS.values().stream()
+				.map(SubjectHolder::new)
+				.map(subjectHolder -> new SimpleSolver(new SlotHolder(),
+						subjectHolder,
+						roomHolder,
+						teacherHolder))
+				.map(simpleSolver -> simpleSolver.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS))
+				.flatMap(Collection::stream)
+				.collect(Collectors.toSet());
+		
+//		Set<SimpleSolver.RoutineCell> routineCells = new HashSet<>();
+//		TestDataSet1.SEM_SUBJECTS.forEach((year, subjectNames) -> {
+//			SimpleSolver solverForYear = new SimpleSolver(new SlotHolder(),
+//					new SubjectHolder(subjectNames),
+//					roomHolder,
+//					teacherHolder);
+//
+//			routineCells.addAll(solverForYear.evaluateSolution(Constants.MAXIMUM_NO_OF_ROUNDS));
+//		});
+		
+		verifyNonOverlappingCellsFor(routineCells);
+	}
+	
+	private void verifyNonOverlappingCellsFor(Set<SimpleSolver.RoutineCell> routineCells) {
+		for (SimpleSolver.RoutineCell cell1 : routineCells) {
+			for (SimpleSolver.RoutineCell cell2 : routineCells) {
+				if (cell1 != cell2
+						&& cell1.room.toString().equals(cell2.room.toString())
+						&& cell1.combinedSlot.isOverlappingWith(cell2.combinedSlot)) {
+					fail("{ " + cell1.subject + "," + cell1.teacher + "," + cell1.combinedSlot + "}"
+							+ " is overlapping with "
+							+ "{" + cell2.subject + "," + cell2.teacher + "," + cell2.combinedSlot + "}"
+							+ " in room " + cell1.room);
+				}
+			}
+		}
 	}
 }
