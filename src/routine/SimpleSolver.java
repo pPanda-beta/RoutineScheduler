@@ -135,9 +135,15 @@ public class SimpleSolver {
 	}
 	
 	private void allocateResources(RoutineCell cell) {
-		cell.subject.assignFor(cell.combinedSlot);
-		cell.teacher.assignFor(cell.combinedSlot);
-		cell.room.assignFor(cell.combinedSlot);
+		if (!cell.subject.assignFor(cell.combinedSlot)) {
+			throw new RuntimeException("Subject can't be assigned");
+		}
+		if (!cell.teacher.assignFor(cell.slots)) {
+			throw new RuntimeException("Teacher can't be assigned");
+		}
+		if (!cell.room.assignFor(cell.slots)) {
+			throw new RuntimeException("Room can't be assigned");
+		}
 		routineCells.add(cell);
 	}
 }

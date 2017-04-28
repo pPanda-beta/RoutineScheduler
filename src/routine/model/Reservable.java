@@ -1,5 +1,8 @@
 package routine.model;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,11 +28,15 @@ public abstract class Reservable {
 	}
 	
 	public boolean assignFor(DayTimeSlot slot) {
-		if (!freeSlots.contains(slot)) {
+		return assignFor(Collections.singletonList(slot));
+	}
+	
+	public boolean assignFor(Collection<DayTimeSlot> slots) {
+		if (!freeSlots.containsAll(slots)) {
 			return false;
 		}
-		freeSlots.remove(slot);
-		assignedSlots.add(slot);
+		freeSlots.removeAll(slots);
+		assignedSlots.addAll(slots);
 		return true;
 	}
 	
