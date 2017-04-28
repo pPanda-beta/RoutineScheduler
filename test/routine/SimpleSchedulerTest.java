@@ -10,6 +10,11 @@ import java.util.Map;
 import routine.model.Allotment;
 
 import static routine.SamplesFactory.SAMPLE_ROOMS;
+import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
+import static routine.TestDataSet1.ROOMS;
+import static routine.TestDataSet1.SEM_SUBJECTS;
+import static routine.TestDataSet1.SUBJECTS;
+import static routine.TestDataSet1.TEACHER_PREFERENCES;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -20,12 +25,7 @@ public class SimpleSchedulerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		simpleScheduler = new SimpleScheduler(
-				SAMPLE_ROOMS,
-				SamplesFactory.SAMPLE_SUBJECTS,
-				SamplesFactory.SAMPLE_SEM_SUBJECTS,
-				SamplesFactory.SAMPLE_TEACHER_PREFERENCES
-		);
+		simpleScheduler = new SimpleScheduler(ROOMS, SUBJECTS, SEM_SUBJECTS, TEACHER_PREFERENCES);
 	}
 	
 	@Test

@@ -23,6 +23,10 @@ public class Teacher extends Reservable {
 		return subjects.contains(subject);
 	}
 	
+	public int teachesMoreSubjectsThan(Teacher other){
+		return this.subjects.size() - other.subjects.size();
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

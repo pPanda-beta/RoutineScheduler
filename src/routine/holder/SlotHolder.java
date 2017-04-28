@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import routine.Constatnts;
 import routine.model.DayTimeSlot;
@@ -16,6 +17,7 @@ import routine.model.DayTimeSlot;
 public class SlotHolder {
 	
 	Set<DayTimeSlot> availableSlots;
+	Set<DayTimeSlot> reusableSlots = new TreeSet<>();
 	
 	public SlotHolder() {
 		availableSlots = Constatnts.generateSlotsForWholeWeek();
@@ -30,11 +32,15 @@ public class SlotHolder {
 	}
 	
 	public void putBackSlots(Collection<DayTimeSlot> slots) {
-		availableSlots.addAll(slots);
+		reusableSlots.addAll(slots);
 	}
 	
 	private List<DayTimeSlot> getConsecutiveSlotsIfPossible(int no) {
 		List<DayTimeSlot> result = new ArrayList<>();
+		if(availableSlots.isEmpty()){
+			availableSlots.addAll(reusableSlots);
+			reusableSlots.clear();
+		}
 		result.add(availableSlots.iterator().next());
 		for (DayTimeSlot slot : availableSlots) {
 			DayTimeSlot lastAddedSlot = result.get(result.size() - 1);
