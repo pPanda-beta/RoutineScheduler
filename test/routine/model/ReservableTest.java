@@ -19,7 +19,8 @@ public class ReservableTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		reservable = new Reservable() {};
+		reservable = new Reservable() {
+		};
 	}
 	
 	@Test
@@ -49,19 +50,16 @@ public class ReservableTest {
 		assertTrue(reservable.isFreeDuring(slot2));
 		assertTrue(reservable.isFreeDuring(slot3));
 	}
-
+	
 	@Test
 	public void cantAssignForSameSlotMoreThanOnce() throws Exception {
-		Reservable reservable = new Reservable() {
-		};
-		
 		DayTimeSlot slot = new DayTimeSlot(MONDAY, "13:30", "14:20");
 		
 		reservable.assignFor(slot);
 		try {
 			reservable.assignFor(slot);
 			fail();
-		} catch (RuntimeException e){
+		} catch (RuntimeException e) {
 		}
 	}
 }
