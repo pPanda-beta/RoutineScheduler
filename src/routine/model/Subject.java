@@ -27,12 +27,11 @@ public class Subject {
 		return slotSize <= remainingMinutes && slotSize <= 2 * DURATION_OF_EACH_PERIOD;
 	}
 	
-	public boolean assignFor(DayTimeSlot slot) {
-		if (canFitIn(slot)) {
-			remainingMinutes -= slot.durationInMinutes();
-			return true;
+	public void assignFor(DayTimeSlot slot) {
+		if (!canFitIn(slot)) {
+			throw new RuntimeException("Subject can't be assigned");
 		}
-		return false;
+		remainingMinutes -= slot.durationInMinutes();
 	}
 	
 	public boolean isLabSubject() {

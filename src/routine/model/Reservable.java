@@ -26,17 +26,16 @@ public abstract class Reservable {
 				.count() == 0;
 	}
 	
-	public boolean assignFor(DayTimeSlot slot) {
-		return assignFor(Collections.singletonList(slot));
+	public void assignFor(DayTimeSlot slot) {
+		assignFor(Collections.singletonList(slot));
 	}
 	
-	public boolean assignFor(Collection<DayTimeSlot> slots) {
+	public void assignFor(Collection<DayTimeSlot> slots) {
 		if (!freeSlots.containsAll(slots)) {
-			return false;
+			throw new RuntimeException("Object of " + this.getClass().getSimpleName() +" can't be assigned");
 		}
 		freeSlots.removeAll(slots);
 		assignedSlots.addAll(slots);
-		return true;
 	}
 	
 	public int noOfAssignedSlot() {
