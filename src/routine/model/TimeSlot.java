@@ -6,7 +6,8 @@ import java.time.LocalTime;
  * Created by Palash_Das on 23-04-2017.
  */
 public class TimeSlot {
-	protected final LocalTime start, end;
+	protected final LocalTime start;
+	protected final LocalTime end;
 	
 	public TimeSlot(LocalTime start, LocalTime end) {
 		this.start = start;
@@ -15,10 +16,6 @@ public class TimeSlot {
 	
 	public TimeSlot(String... times) {
 		this(LocalTime.parse(times[0]), LocalTime.parse(times[1]));
-	}
-	
-	public static TimeSlot compose(TimeSlot slot1, TimeSlot slot2) {
-		return new TimeSlot(slot1.start, slot2.end);
 	}
 	
 	public LocalTime getStart() {
