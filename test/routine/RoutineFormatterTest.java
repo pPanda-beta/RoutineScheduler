@@ -3,9 +3,14 @@ package routine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import routine.SimpleSolver.RoutineCell;
+import routine.model.Allotment;
 import routine.model.DayTimeSlot;
 import routine.model.Room;
 import routine.model.Subject;
@@ -110,7 +115,40 @@ public class RoutineFormatterTest {
 	
 	@Test
 	public void displayTeacherWiseRoutine() throws Exception {
-
+		StringBuilder output = new StringBuilder();
+		
+		formatter.getRoutineByTeacher().forEach((teacherName, hisRoutine) -> {
+			output.append("\n" + teacherName + ": \n");
+			printRoutine(output, hisRoutine);
+		});
+		System.out.println(output);
+	}
+	
+	@Test
+	public void displayRoomWiseRoutine() throws Exception {
+		StringBuilder output = new StringBuilder();
+		
+		formatter.getRoutineByRoom().forEach((roomNo, hisRoutine) -> {
+			output.append("\n" + roomNo + ": \n");
+			printRoutine(output, hisRoutine);
+		});
+		System.out.println(output);
+	}
+	
+	@Test
+	public void displayEntireRoutine() throws Exception {
+		StringBuilder output = new StringBuilder("Routine : \n");
+		
+		printRoutine(output, formatter.getRoutineByYear());
+		System.out.println(output);
+	}
+	
+	private void printRoutine(StringBuilder output, Map<DayOfWeek, Map<String, List<Allotment>>> hisRoutine) {
+		hisRoutine.forEach((day, deptClasses) -> {
+			deptClasses.forEach((year, row) -> {
+				output.append(day + " - " + year + " - " + row.toString() + "\n");
+			});
+		});
 	}
 	
 	private static RoutineCell makeRoutineCell(DayTimeSlot totalSlot,
@@ -121,7 +159,7 @@ public class RoutineFormatterTest {
 		return new RoutineCell() {{
 			this.combinedSlot = totalSlot;
 			this.room = new Room(roomNo);
-			this.teacher = new Teacher(teacherName, null);
+			this.teacher = new Teacher(teacherName, Collections.emptyList());
 			this.subject = new Subject(subjectCode);
 			this.yearAndSection = batch;
 		}};
