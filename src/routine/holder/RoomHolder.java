@@ -27,6 +27,6 @@ public class RoomHolder {
 				.filter(room -> room.isFreeDuring(slot))
 				.filter(room -> room.canSupport(subject))
 				.findFirst()
-				.orElse(null);
+				.orElseThrow(() -> new RuntimeException("No room is empty for given subject and time"));
 	}
 }

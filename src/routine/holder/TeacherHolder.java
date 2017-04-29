@@ -42,6 +42,6 @@ public class TeacherHolder {
 				.filter(teacher -> teacher.canTeach(subject))
 //				.sorted(Comparator.comparing(Teacher::noOfAssignedSlot))
 				.findFirst()
-				.orElse(null);
+				.orElseThrow(() -> new RuntimeException("No teacher available"));
 	}
 }
