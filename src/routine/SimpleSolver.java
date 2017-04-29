@@ -153,7 +153,7 @@ public class SimpleSolver {
 		routineCells.add(cell);
 	}
 	
-	public class RoutineCell {
+	public static class RoutineCell {
 		DayTimeSlot combinedSlot;
 		List<DayTimeSlot> slots;
 		Subject subject;
