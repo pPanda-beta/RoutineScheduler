@@ -34,6 +34,6 @@ public class SubjectHolder {
 				.filter(subject -> subject.canFitIn(slot))
 				//	.sorted(Comparator.comparing(subject -> -subject.getRemainingMinutes()))
 				.findFirst()
-				.orElse(null);
+				.orElseThrow(() -> new RuntimeException("No available subject found"));
 	}
 }
