@@ -78,65 +78,51 @@ public class SimpleSolver {
 	}
 	
 	private boolean strategy(int... periods) {
-		int totalPeriods = Arrays.stream(periods).reduce(Integer::sum).getAsInt();
-		List<DayTimeSlot> totalSlots = slotHolder.popConsecutiveSlots(totalPeriods);
-		if (totalSlots == null) {
+		List<RoutineCell> finalCells = new ArrayList<>();
+		List<DayTimeSlot> totalSlots = null;
+		
+		try {
+			int totalPeriods = Arrays.stream(periods).reduce(Integer::sum).getAsInt();
+			totalSlots = slotHolder.popConsecutiveSlots(totalPeriods);
+			
+			int startIndex = 0;
+			for (int period : periods) {
+				List<DayTimeSlot> subSlots = totalSlots.subList(startIndex, startIndex + period);
+				RoutineCell cell = arrangeResources(subSlots);
+				finalCells.add(cell);
+				startIndex += period;
+			}
+			
+			verifyUniqueSubjects(finalCells);
+		} catch (Exception e) {
+			if (totalSlots != null) {
+				slotHolder.putBackSlots(totalSlots);
+			}
 			return false;
 		}
-		
-		List<RoutineCell> finalCells = new ArrayList<>();
-		
-		int startIndex = 0;
-		for (int period : periods) {
-			List<DayTimeSlot> subSlots = totalSlots.subList(startIndex, startIndex + period);
-			RoutineCell cell = arrangeResources(subSlots);
-			if (cell == null) {
-				slotHolder.putBackSlots(totalSlots);
-				return false;
-			}
-			finalCells.add(cell);
-			startIndex += period;
-		}
-		
+		finalCells.forEach(this::allocateResources);
+		return true;
+	}
+	
+	private void verifyUniqueSubjects(List<RoutineCell> finalCells) {
 		if (finalCells.stream()
 				.map(cell -> cell.subject.toString())
 				.distinct()
 				.count() != finalCells.size()
 				) {
-			slotHolder.putBackSlots(totalSlots);
-			return false;
+			throw new RuntimeException("Same subjects are chosen more than once");
 		}
-		
-		finalCells.forEach(this::allocateResources);
-		return true;
 	}
 	
 	private RoutineCell arrangeResources(List<DayTimeSlot> slots) {
-		DayTimeSlot turboSlot = DayTimeSlot.compose(slots);
-		
-		Subject subject = subjectHolder.getSubjectSuitableFor(turboSlot);
-		if (subject == null) {
-			return null;
-		}
-		
-		Teacher teacher = teacherHolder.getSuitableTeacherFor(subject, turboSlot);
-		if (teacher == null) {
-			return null;
-		}
-		
-		Room room = roomHolder.getFreeRoomDuring(subject, turboSlot);
-		if (room == null) {
-			return null;
-		}
-		
 		RoutineCell cell = new RoutineCell();
-		
-		cell.combinedSlot = turboSlot;
+
 		cell.slots = slots;
-		cell.subject = subject;
-		cell.teacher = teacher;
-		cell.room = room;
-		
+		cell.combinedSlot = DayTimeSlot.compose(slots);
+		cell.subject = subjectHolder.getSubjectSuitableFor(cell.combinedSlot);
+		cell.teacher = teacherHolder.getSuitableTeacherFor(cell.subject, cell.combinedSlot);
+		cell.room = roomHolder.getFreeRoomDuring(cell.subject, cell.combinedSlot);
+
 		return cell;
 	}
 	
