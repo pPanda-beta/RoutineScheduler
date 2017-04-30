@@ -34,11 +34,11 @@ public class SimpleScheduler extends Scheduler {
 	
 	private void validateSubjects(List<String> subjects, Map<String, List<String>> semSubjects, Map<String, List<String>> teacherPreferences) {
 		if (!Validator.isValidSemSubject(subjects, semSubjects)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Subjects and semester preferences are inconsistent");
 		}
 		
 		if (!Validator.isValidTeacherPreference(subjects, teacherPreferences)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Subjects and teacher preferences are inconsistent");
 		}
 	}
 	
