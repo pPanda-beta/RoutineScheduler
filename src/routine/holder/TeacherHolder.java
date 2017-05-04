@@ -1,12 +1,10 @@
 package routine.holder;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import routine.model.DayTimeSlot;
+import routine.model.Reservable;
 import routine.model.Subject;
 import routine.model.Teacher;
 
@@ -43,5 +41,9 @@ public class TeacherHolder {
 //				.sorted(Comparator.comparing(Teacher::noOfAssignedSlot))
 				.findFirst()
 				.orElse(null);
+	}
+	
+	public Collection<DayTimeSlot> getCommonSlots() {
+		return Reservable.getCommonSlotsFrom(new HashSet<>(availableTeachers));
 	}
 }

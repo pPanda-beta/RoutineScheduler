@@ -23,6 +23,11 @@ public class SlotHolder {
 		availableSlots = Constants.generateSlotsForWholeWeek();
 	}
 	
+	public void discardSlots(Collection<DayTimeSlot> slots) {
+		availableSlots.removeAll(slots);
+		reusableSlots.removeAll(slots);
+	}
+	
 	public List<DayTimeSlot> popConsecutiveSlots(int no) {
 		List<DayTimeSlot> slots = getConsecutiveSlotsIfPossible(no);
 		if (slots != null) {
