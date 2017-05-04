@@ -1,11 +1,11 @@
 package routine.model;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import routine.Constants;
+import routine.SamplesFactory;
+import routine.holder.TeacherHolder;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -40,5 +40,11 @@ public abstract class Reservable {
 	
 	public int noOfAssignedSlot() {
 		return assignedSlots.size();
+	}
+	
+	public static Collection<DayTimeSlot> getCommonSlotsFrom(Collection<Reservable> reservables) {
+		Collection<DayTimeSlot> commonSlots = new TreeSet<>(reservables.iterator().next().assignedSlots);
+		reservables.forEach(reservable -> commonSlots.retainAll(reservable.assignedSlots));
+		return commonSlots;
 	}
 }

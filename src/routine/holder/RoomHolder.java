@@ -1,10 +1,9 @@
 package routine.holder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import routine.model.DayTimeSlot;
+import routine.model.Reservable;
 import routine.model.Room;
 import routine.model.Subject;
 
@@ -28,5 +27,9 @@ public class RoomHolder {
 				.filter(room -> room.canSupport(subject))
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("No room is empty for given subject and time"));
+	}
+	
+	public Collection<DayTimeSlot> getCommonSlots() {
+		return Reservable.getCommonSlotsFrom(new HashSet<>(rooms));
 	}
 }

@@ -56,6 +56,7 @@ public class SimpleSolver {
 	}
 	
 	private Set<RoutineCell> evaluateSolution(int noOfRounds, Function<Integer, Boolean> processTechnique) {
+		discardSlotsReservedByAll();
 		routineCells = new HashSet<>();
 		while (noOfRounds-- > 0) {
 			if (!processTechnique.apply(noOfRounds)) {
@@ -66,6 +67,11 @@ public class SimpleSolver {
 			}
 		}
 		return null;
+	}
+	
+	private void discardSlotsReservedByAll() {
+		slotHolder.discardSlots(teacherHolder.getCommonSlots());
+		slotHolder.discardSlots(roomHolder.getCommonSlots());
 	}
 	
 	private boolean processOneRoundSerially(int roundNumber) {
