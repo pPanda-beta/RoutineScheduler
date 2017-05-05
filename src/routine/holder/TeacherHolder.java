@@ -14,16 +14,14 @@ import routine.model.Teacher;
 
 public class TeacherHolder {
 	
-	private final Set<Teacher> availableTeachers = new TreeSet<Teacher>((t1, t2) -> {
-		int cmp = -t1.teachesMoreSubjectsThan(t2);
-		if (cmp == 0) {
-			cmp = t1.noOfAssignedSlot() - t2.noOfAssignedSlot();
-		}
-		if (cmp == 0) {
-			cmp = t1.toString().compareTo(t2.toString());
-		}
-		return cmp;
-	});
+	private final Comparator<Teacher> compareWhoTeachesMoreSubjects = Teacher::teachesMoreSubjectsThan;
+	private final Comparator<Teacher> compareWhoTeachesLessSubjects = compareWhoTeachesMoreSubjects.reversed();
+	
+	private final Set<Teacher> availableTeachers = new TreeSet<Teacher>(
+			compareWhoTeachesLessSubjects
+					.thenComparing(Teacher::noOfAssignedSlot)
+					.thenComparing(Teacher::toString)
+	);
 	
 	public TeacherHolder(Map<String, List<String>> preferences) {
 		preferences.forEach((name, subjectNames) -> {
