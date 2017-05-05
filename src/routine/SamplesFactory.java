@@ -1,14 +1,10 @@
 package routine;
 
+import routine.model.Allotment;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import routine.model.Allotment;
+import java.util.*;
 
 import static java.time.DayOfWeek.MONDAY;
 

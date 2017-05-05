@@ -2,20 +2,17 @@ package routine;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import routine.holder.RoomHolder;
 import routine.holder.SlotHolder;
 import routine.holder.SubjectHolder;
 import routine.holder.TeacherHolder;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.fail;
-import static routine.SamplesFactory.SAMPLE_ROOMS;
-import static routine.SamplesFactory.SAMPLE_SEM_SUBJECTS;
-import static routine.SamplesFactory.SAMPLE_TEACHER_PREFERENCES;
+import static routine.SamplesFactory.*;
 
 /**
  * Created by Palash_Das on 24-04-2017.

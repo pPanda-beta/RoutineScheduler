@@ -1,14 +1,14 @@
 package routine;
 
+import routine.model.DayTimeSlot;
+import routine.model.TimeSlot;
+
 import java.time.DayOfWeek;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-
-import routine.model.DayTimeSlot;
-import routine.model.TimeSlot;
 
 import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;

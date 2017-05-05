@@ -1,10 +1,10 @@
 package routine;
 
+import routine.model.Allotment;
+
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Map;
-
-import routine.model.Allotment;
 
 /**
  * Created by Palash_Das on 23-04-2017.

@@ -2,22 +2,17 @@ package routine;
 
 import org.junit.Before;
 import org.junit.Test;
+import routine.holder.TeacherHolder;
+import routine.model.DayTimeSlot;
+import routine.model.Subject;
+import routine.model.Teacher;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import routine.holder.TeacherHolder;
-import routine.model.DayTimeSlot;
-import routine.model.Subject;
-import routine.model.Teacher;
-
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -36,9 +31,9 @@ public class TeacherHolderTest {
 	
 	@Test
 	public void cantGetTeacherForUnknownSubject() throws Exception {
-		try{
+		try {
 			teacherHolder.getSuitableTeacherFor(new Subject("ME101"), new DayTimeSlot(DayOfWeek.MONDAY, "11:10", "12:00"));
-		}catch (RuntimeException e){
+		} catch (RuntimeException e) {
 			return;
 		}
 		fail();
@@ -52,9 +47,9 @@ public class TeacherHolderTest {
 		Teacher PD = teacherHolder.getSuitableTeacherFor(cs401, slot);
 		PD.assignFor(slot);
 		
-		try{
+		try {
 			teacherHolder.getSuitableTeacherFor(cs401, slot);
-		}catch (RuntimeException e){
+		} catch (RuntimeException e) {
 			return;
 		}
 		fail();

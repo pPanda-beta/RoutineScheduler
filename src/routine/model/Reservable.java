@@ -1,11 +1,11 @@
 package routine.model;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import routine.Constants;
-import routine.SamplesFactory;
-import routine.holder.TeacherHolder;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -32,7 +32,7 @@ public abstract class Reservable {
 	
 	public void assignFor(Collection<DayTimeSlot> slots) {
 		if (!freeSlots.containsAll(slots)) {
-			throw new RuntimeException("Object of " + this.getClass().getSimpleName() +" can't be assigned");
+			throw new RuntimeException("Object of " + this.getClass().getSimpleName() + " can't be assigned");
 		}
 		freeSlots.removeAll(slots);
 		assignedSlots.addAll(slots);

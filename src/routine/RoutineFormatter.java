@@ -1,14 +1,10 @@
 package routine;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import routine.model.Allotment;
 import routine.model.Reservable;
+
+import java.time.DayOfWeek;
+import java.util.*;
 
 /**
  * Created by Palash_Das on 29-04-2017.

@@ -1,17 +1,13 @@
 package routine;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import routine.holder.RoomHolder;
 import routine.holder.SlotHolder;
 import routine.holder.SubjectHolder;
 import routine.holder.TeacherHolder;
 import routine.model.Allotment;
+
+import java.time.DayOfWeek;
+import java.util.*;
 
 import static routine.Constants.MAXIMUM_NO_OF_ROUNDS;
 

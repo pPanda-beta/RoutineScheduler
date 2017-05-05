@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static java.time.DayOfWeek.MONDAY;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static routine.Constants.ALL_DAY_SLOT_TIMES;
 
 /**

@@ -2,22 +2,14 @@ package routine;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.time.DayOfWeek;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-
 import routine.model.Allotment;
 
+import java.time.DayOfWeek;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.fail;
-import static routine.TestDataSet1.ROOMS;
-import static routine.TestDataSet1.SEM_SUBJECTS;
-import static routine.TestDataSet1.SUBJECTS;
-import static routine.TestDataSet1.TEACHER_PREFERENCES;
+import static routine.TestDataSet1.*;
 
 /**
  * Created by Palash_Das on 24-04-2017.

@@ -1,12 +1,12 @@
 package routine.holder;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import routine.model.DayTimeSlot;
 import routine.model.Reservable;
 import routine.model.Subject;
 import routine.model.Teacher;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Palash_Das on 24-04-2017.

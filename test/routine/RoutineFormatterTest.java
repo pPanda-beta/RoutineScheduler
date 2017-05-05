@@ -2,6 +2,8 @@ package routine;
 
 import org.junit.Before;
 import org.junit.Test;
+import routine.SimpleSolver.RoutineCell;
+import routine.model.*;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
@@ -9,18 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import routine.SimpleSolver.RoutineCell;
-import routine.model.Allotment;
-import routine.model.DayTimeSlot;
-import routine.model.Room;
-import routine.model.Subject;
-import routine.model.Teacher;
-
-import static java.time.DayOfWeek.FRIDAY;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.DayOfWeek.THURSDAY;
-import static java.time.DayOfWeek.TUESDAY;
-import static java.time.DayOfWeek.WEDNESDAY;
+import static java.time.DayOfWeek.*;
 
 /**
  * Created by Palash_Das on 29-04-2017.

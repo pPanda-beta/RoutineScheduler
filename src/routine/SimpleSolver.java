@@ -1,13 +1,5 @@
 package routine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.function.Function;
-
 import routine.holder.RoomHolder;
 import routine.holder.SlotHolder;
 import routine.holder.SubjectHolder;
@@ -16,6 +8,9 @@ import routine.model.DayTimeSlot;
 import routine.model.Room;
 import routine.model.Subject;
 import routine.model.Teacher;
+
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * Created by Palash_Das on 24-04-2017.
@@ -122,13 +117,13 @@ public class SimpleSolver {
 	
 	private RoutineCell arrangeResources(List<DayTimeSlot> slots) {
 		RoutineCell cell = new RoutineCell();
-
+		
 		cell.slots = slots;
 		cell.combinedSlot = DayTimeSlot.compose(slots);
 		cell.subject = subjectHolder.getSubjectSuitableFor(cell.combinedSlot);
 		cell.teacher = teacherHolder.getSuitableTeacherFor(cell.subject, cell.combinedSlot);
 		cell.room = roomHolder.getFreeRoomDuring(cell.subject, cell.combinedSlot);
-
+		
 		return cell;
 	}
 	

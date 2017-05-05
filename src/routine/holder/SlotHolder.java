@@ -1,13 +1,9 @@
 package routine.holder;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import routine.Constants;
 import routine.model.DayTimeSlot;
+
+import java.util.*;
 
 /**
  * Created by Palash_Das on 23-04-2017.

@@ -1,11 +1,11 @@
 package routine.holder;
 
+import routine.model.DayTimeSlot;
+import routine.model.Subject;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import routine.model.DayTimeSlot;
-import routine.model.Subject;
 
 /**
  * Created by Palash_Das on 24-04-2017.

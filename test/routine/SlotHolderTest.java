@@ -2,15 +2,12 @@ package routine;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-
 import routine.holder.SlotHolder;
 import routine.model.DayTimeSlot;
 
-import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertNull;
-import static junit.framework.TestCase.fail;
+import java.util.List;
+
+import static junit.framework.TestCase.*;
 
 /**
  * Created by Palash_Das on 24-04-2017.

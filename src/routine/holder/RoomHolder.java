@@ -1,11 +1,14 @@
 package routine.holder;
 
-import java.util.*;
-
 import routine.model.DayTimeSlot;
 import routine.model.Reservable;
 import routine.model.Room;
 import routine.model.Subject;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by Palash_Das on 24-04-2017.
